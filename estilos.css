@@ -1,267 +1,238 @@
-  .menu {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    z-index: 1000;
-    background-color: transparent;
-    border: none;
-  }
-  
-  .menu .navbar ul li a {
-    font-size: 20px;
-    padding: 20px;
-    display: block;
-    font-weight: 600;
-  }
-  
-  .menu label {
-    cursor: pointer;
-    display: none;
-  }
-  
-.content-wrapper {
-    display: flex; /* Wrap footer and content in a flex container */
-    flex-direction: column; /* Stack content vertically by default */
-  }
-  
-  .footer {
-    /* ... remove unnecessary float property (already handled by flexbox) */
-    text-align: center; /* Center content horizontally */
-  }
-  
-  .form {
-    display: flex; /* Use flexbox for better layout control */
-    justify-content: center;
-    margin-top: 35px;
-  }
+/* Importación de fuente (fuera de <style> en HTML) */
+@import url('https://fonts.googleapis.com/css2?family=Amarante&display=swap');
 
-.campo {
-    margin-right: 10px;
-    padding: 17px 35px;
-    outline: none;
-    color: #1B293A;
-    flex: 1; /* Ensure fields expand to fill available space */
-}
-
-.campo::placeholder {
-    color: #0f0000;
-}
-
-.footer-txt {
-    text-align: center;
-    margin-top: 20px; /* Adjust margin as needed */
-    border-top: 1px solid #0000007e;
-    padding: 20px 0;
-}
-
-.footer-txt p {
-    color: #18293A;
-    font-size: 16px;
-    text-align: center; /* Centra el texto horizontalmente */
-    margin: 0 auto;
-  }
-  
-  /* ... resto de tu CSS ... */
-  
-  /* Ejemplo para eliminar un borde (ajusta el selector según tu caso) */
-  .elemento-con-borde {
-    border: none;
-  }
-  
-  /* Ejemplo para eliminar un fondo de color (ajusta el selector según tu caso) */
-  .elemento-con-fondo {
-    background-color: transparent;
-  }
-  
-#Hero {
-    position: relative; /* Para posicionar elementos sobre el video */
-    height: 100vh; /* Ocupa toda la altura de la viewport */
-    display: flex; /* Para alinear elementos en el contenedor */
-    flex-direction: column; /* Apila elementos verticalmente */
-    justify-content: center; /* Centra verticalmente los elementos */
-    align-items: center; /* Centra horizontalmente los elementos */
-    overflow: hidden;
-  }
-  
-  /* Estilos para la sección de texto */
-  .promo {
-    text-align: center;
-    color: #ffffff; /* Color de texto blanco */
-    z-index: 1; /* Para que el texto esté sobre el video */
-  }
-  
-  h1 {
-    font-size: 6rem;
-    margin-bottom: 2rem;
-    color: #ffffff;
-    font-weight: bold;
-  }
-  
-  p {
-    font-size: 1.4rem;
-    max-width: 1000px; /* Ajusta el ancho máximo del texto */
-    color: #ffffff;
-    font-weight: bold;
-  }
-
-  /* Estilos para el video */
-  video {
+/* --- Video de Fondo y Superposición --- */
+#background-video {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* Asegura que el video cubra toda el área sin distorsionarse */
     z-index: -1;
-    background-color: rgb(255, 255, 255);
-    filter: brightness(0.5);
-    opacity: 1;
-  }
-  
-  /* Estilos para la capa (opcional) */
-  .capa {
+    filter: brightness(0.5); /* Oscurece el video para que el texto sea más legible */
+}
+
+.video-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo negro semi-transparente */
-    z-index: 0; /* Para que la capa esté encima del video y detrás del texto */
-  }
+    background-color: rgba(0, 0, 0, 0.3); /* Capa semi-transparente para mejorar el contraste */
+    z-index: 0;
+}
 
-  .btn-btn.lg {
+/* --- Sección Hero --- */
+#Hero {
+    position: relative;
+    height: 100vh; /* Ocupa toda la altura de la ventana */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 20px; /* Añade un padding para pantallas pequeñas */
+}
+
+.promo {
+    text-align: center;
+    color: #ffffff;
+    z-index: 1; /* Para que el texto esté sobre el video y la superposición */
+    padding: 15px; /* Espaciado interno para el contenido de la promo */
+}
+
+.promo h1 {
+    font-family: 'Amarante', cursive; /* Aplica la fuente importada */
+    font-size: 4rem; /* Ajuste para tamaños de pantalla grandes */
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra para mejor legibilidad */
+}
+
+.promo h2 {
+    font-size: 2.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.promo p {
+    font-size: 1.2rem; /* Tamaño de fuente relativo para mejor responsividad */
+    max-width: 900px; /* Un ancho máximo razonable */
+    margin: 0 auto 1rem auto; /* Centra el párrafo y añade margen inferior */
+    color: #ffffff;
+    font-weight: normal; /* El bold puede ser excesivo para párrafos largos */
+    line-height: 1.6; /* Espaciado entre líneas para mejor lectura */
+}
+
+/* Ajustes del botón (Bootstrap ya tiene .btn y .btn-primary, .btn-lg) */
+/* Si aún necesitas un estilo específico para el botón de esta página: */
+.btn.btn-primary.btn-lg { /* Más específico para que sobrescriba Bootstrap si es necesario */
     background-color: rgb(255, 255, 255);
     color: rgb(0, 0, 0);
-    padding: 15px 30px;
-    text-decoration: none; /* Elimina el subrayado por defecto de los enlaces */
-    /* Otros estilos */
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  
-  .btn-btn {
-    background-color: rgb(255, 250, 250);
-    color: rgb(0, 0, 0);
-    padding: 15px 30px;
-    text-decoration: none; /* Elimina el subrayado por defecto de los enlaces */
-    /* Otros estilos */
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-
-  .container2 {
-    position: relative;
-    left: 0px; /* Mueve el contenedor 100px hacia la derecha */
-    top: 50px;  /* Mueve el contenedor 50px hacia abajo */
-  }
-
-  /* NUEVO */
-.contact-info {
-    margin-top: 30px; /* Espacio superior para separar del título del footer */
-    margin-bottom: 30px; /* Espacio inferior para separar del footer-txt */
-    display: flex;
-    flex-direction: column; /* Apila los elementos de contacto verticalmente */
-    align-items: center; /* Centra los elementos horizontalmente */
-    color: #333; /* Un color de texto general para la información de contacto */
-}
-
-/* NUEVO */
-.contact-info h3,
-.contact-info h4 {
-    margin-bottom: 10px;
-    color: #1a1a1a; /* Un color más oscuro para los encabezados de contacto */
-}
-
-/* NUEVO */
-.contact-info p {
-    margin-bottom: 8px; /* Espacio entre cada línea de información de contacto */
-    font-size: 1.1em; /* Ajusta el tamaño de fuente si es necesario */
-    line-height: 1.5; /* Espaciado entre líneas */
-}
-
-/* NUEVO */
-.contact-info p strong {
-    color: #000; /* Color más fuerte para los títulos como "WhatsApp" */
-}
-
-/* NUEVO */
-.contact-info a {
-    color: #007bff; /* Un color de enlace azul estándar */
-    text-decoration: none; /* Quita el subrayado por defecto */
-    transition: color 0.3s ease; /* Transición suave al pasar el ratón */
-}
-
-/* NUEVO */
-.contact-info a:hover {
-    color: #0056b3; /* Color de enlace al pasar el ratón */
-    text-decoration: underline; /* Subrayado al pasar el ratón */
-}
-
-/* NUEVO */
-.social-links {
-    margin-top: 20px; /* Espacio superior para separar de la información de contacto */
-    display: flex;
-    gap: 15px; /* Espacio entre los iconos de redes sociales */
-    align-items: center;
-    justify-content: center; /* Centra los iconos si no hay otros elementos */
-}
-
-/* NUEVO */
-.social-links img {
-    width: 40px; /* Tamaño de los iconos de redes sociales */
-    height: 40px;
-    border-radius: 50%; /* Si quieres que los iconos sean redondos */
-    transition: transform 0.3s ease; /* Efecto de zoom al pasar el ratón */
-}
-
-/* NUEVO */
-.social-links img:hover {
-    transform: scale(1.1); /* Ligeramente más grande al pasar el ratón */
-}
-
-/* NUEVO (si no lo tienes ya en tus botones generales) */
-.btn-btn {
-    /* Asegúrate de que estos estilos sean coherentes con tus otros botones */
-    display: inline-block; /* Permite aplicar padding y márgenes */
     padding: 15px 30px;
     text-decoration: none;
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
-    /* ... tus colores específicos ... */
-    background-color: rgb(255, 250, 250);
-    color: rgb(0, 0, 0);
+    border: none; /* Elimina el borde de Bootstrap si lo deseas */
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.btn-btn:hover {
-    background-color: rgb(200, 200, 200); /* Un color más oscuro al pasar el ratón */
+.btn.btn-primary.btn-lg:hover {
+    background-color: rgb(200, 200, 200);
     color: rgb(50, 50, 50);
 }
 
-  @media (max-width: 991px) {
+/* --- MEDIA QUERIES para Hero y Promo --- */
+
+/* Teléfonos y Tablets pequeñas (Mobile First Approach) */
+@media (max-width: 767px) {
+    .promo h1 {
+        font-size: 2.5rem; /* Reduce el tamaño del título en móviles */
+        margin-bottom: 1rem;
+    }
+
+    .promo h2 {
+        font-size: 1.8rem;
+        margin-top: 1.5rem;
+    }
+
+    .promo p {
+        font-size: 0.95rem; /* Reduce el tamaño del texto del párrafo */
+        max-width: 95%; /* Ocupa más ancho en pantallas pequeñas */
+        margin-bottom: 0.8rem;
+    }
+
+    .btn.btn-primary.btn-lg {
+        padding: 12px 25px; /* Ajusta el padding del botón */
+        font-size: 0.9rem;
+    }
+}
+
+/* Tablets grandes y monitores pequeños */
+@media (min-width: 768px) and (max-width: 1199px) {
+    .promo h1 {
+        font-size: 3.5rem;
+    }
+
+    .promo h2 {
+        font-size: 2.2rem;
+    }
+
+    .promo p {
+        font-size: 1.1rem;
+    }
+}
+
+/* --- Estilos para el Footer (Comunes a ambas páginas) --- */
+/* Es recomendable poner estos en un archivo CSS aparte si ambas páginas lo usan */
+/* O duplicarlos aquí si el footer solo se usa en index.html */
+
+.footer {
+    text-align: center;
+    background-color: #f8f8f8; /* Fondo claro para el footer */
+    padding: 40px 20px; /* Aumenta el padding para que no se vea tan apretado */
+    border-top: 1px solid #e0e0e0;
+    margin-top: 50px; /* Asegura espacio suficiente después del contenido principal */
+}
+
+.contact-info {
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.contact-info h2,
+.contact-info h4 {
+    margin-bottom: 10px;
+    color: #1a1a1a;
+    font-size: 1.6rem; /* Ajuste para encabezados del footer */
+}
+
+.contact-info p {
+    margin-bottom: 8px;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #555; /* Color más suave para el texto */
+    font-weight: normal; /* Sobrescribe el bold si viene de un estilo global de p */
+}
+
+.contact-info p strong {
+    color: #000;
+}
+
+.contact-info a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.social-links {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+.social-links img {
+    width: 35px; /* Ligeramente más pequeños */
+    height: 35px;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.social-links img:hover {
+    transform: scale(1.15); /* Más zoom al pasar el ratón */
+}
+
+.footer-txt {
+    text-align: center;
+    margin-top: 30px;
+    border-top: 1px solid #e0e0e0; /* Un borde más claro */
+    padding-top: 20px;
+}
+
+.footer-txt p {
+    color: #666; /* Un color más suave para el texto legal */
+    font-size: 0.9rem;
+    margin: 0 auto;
+    max-width: 800px; /* Limita el ancho del texto legal */
+    font-weight: normal; /* Sobrescribe el bold */
+}
+
+/* Media Query para el Footer (si se mantiene en este archivo) */
+@media (max-width: 991px) {
     .footer {
-        padding: 0;
-        margin-top: -140px;
+        padding: 30px 15px; /* Reduce padding en móviles */
+        margin-top: 30px; /* Ajusta el margen superior si es necesario */
     }
 
-    .form {
-        flex-direction: column;
-        align-items: center; /* Center fields vertically */
+    .contact-info h2,
+    .contact-info h4 {
+        font-size: 1.4rem;
     }
 
-    .campo {
-        margin: 0 0 10px 0;
-        width: 100%; /* Make fields full width on smaller screens */
+    .contact-info p {
+        font-size: 0.9rem;
+    }
+
+    .social-links img {
+        width: 30px;
+        height: 30px;
     }
 
     .footer-txt {
-        margin-top: 30px;
+        margin-top: 20px;
+        padding-top: 15px;
     }
 }
