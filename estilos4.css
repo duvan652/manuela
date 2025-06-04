@@ -1,0 +1,322 @@
+video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta el video para cubrir toda el área */
+    z-index: -1; /* Para que el video esté detrás del texto */
+    opacity: 1;
+    filter: brightness(0.2);
+  }
+
+
+/* Fila de cartas - usamos CSS Grid para el diseño y el espaciado */
+.row {
+  display: grid;
+  /* Ajusta este minmax() según el ancho deseado para tus tarjetas.
+     350px es un buen punto de partida para que no se vean tan delgadas.
+     Puedes subirlo a 380px, 400px si quieres tarjetas más anchas. */
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 20px; /* Aumentado ligeramente el espacio para que haya aire entre ellas */
+  padding: 20px; /* Relleno alrededor de todas las cartas */
+  margin: 0 auto; /* Centra el contenedor de las cartas */
+  /* Asegúrate de que este max-width sea generoso para permitir que las columnas se expandan.
+     Si usas un .container-fluid, este max-width del .row será el límite de las cartas. */
+  max-width: 1200px; /* Ejemplo de un ancho generoso */
+
+  /* PROPIEDADES CLAVE PARA LA DISTRIBUCIÓN Y ALINEACIÓN */
+  justify-items: center; /* Centra cada tarjeta HORIZONTALMENTE dentro de su celda de grid */
+  align-items: stretch; /* ESTIRA las tarjetas VERTICALMENTE para llenar la altura de su celda.
+                           Esto es útil si el .card h-100 no está funcionando como se espera
+                           o si las celdas de grid tienen diferentes alturas. */
+
+  /* Para controlar cómo la CUADRÍCULA COMPLETA se alinea dentro del .row si sobra espacio.
+     Si quieres que la cuadrícula se centre en la página: */
+  justify-content: center; /* Centra las COLUMNAS de la cuadrícula si no ocupan todo el max-width */
+  /* align-content: start; /* Opcional: Alinea las FILAS de la cuadrícula al inicio si sobra espacio vertical */
+}
+
+/* Neutralizamos los paddings y márgenes de Bootstrap en las columnas */
+.col-md-4, .col-sm-6 {
+  flex: unset;
+  max-width: unset;
+  padding: unset;
+  margin-bottom: 0 !important;
+  display: flex; /* Asegura que la carta dentro se estire si tiene h-100 */
+}
+
+/* Estilos para las tarjetas individuales */
+.card {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  height: 100%; /* Asegura que todas las tarjetas en la misma fila tengan la misma altura */
+  text-decoration: none;
+  color: inherit;
+  width: 100%; /* Asegura que la tarjeta ocupe el ancho completo de su celda de grid */
+}
+
+/* Animación al pasar el mouse (hover) o al tocar */
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Animación al hacer click (active) o al enfocar con teclado */
+.card:active,
+.card:focus {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  outline: none;
+}
+
+/* Estilos para la imagen dentro de la carta */
+.card-img-top {
+  width: 100%;
+  height: 120px; /* Ajusta esta altura. Si aún se ven "delgadas", súbela a 300px, 320px, etc. */
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+}
+
+/* Estilos para el cuerpo de la carta */
+.card-body {
+  padding: 20px 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+/* Estilos para el texto de la carta */
+.card-text {
+  font-size: 18px;
+  line-height: 1.5;
+  color: #555;
+  margin-bottom: 0;
+  flex-grow: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Media Queries para ajustar el diseño en pantallas más pequeñas */
+@media (max-width: 1200px) { /* Nuevo breakpoint para ajustar antes si es necesario */
+  .row {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Mínimo un poco menor */
+    gap: 20px;
+    padding: 18px;
+  }
+  .card-img-top {
+    height: 300px;
+  }
+}
+
+@media (max-width: 1000px) { /* Este se activa antes que 768px de Bootstrap para md */
+  .row {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Más ajuste para tabletas */
+    gap: 18px;
+    padding: 15px;
+  }
+  .card-img-top {
+    height: 300px;
+  }
+  .card-body {
+    padding: 18px 20px;
+  }
+}
+
+@media (max-width: 1000px) { /* Para pantallas de tableta pequeñas y móviles grandes */
+  .row {
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 15px;
+    padding: 15px;
+  }
+  .card-img-top {
+    height: 300px;
+  }
+  .card-body {
+    padding: 15px 20px;
+  }
+  .card-text {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 600x) { /* Para móviles */
+  .row {
+    grid-template-columns: 1fr; /* Una sola columna para móviles */
+    gap: 15px;
+    padding: 15px;
+  }
+  .card {
+    border-radius: 8px;
+  }
+  .card-img-top {
+    height: 250px;
+  }
+  .card-body {
+    padding: 15px;
+  }
+}
+
+ .footer {
+    /* ... remove unnecessary float property (already handled by flexbox) */
+    text-align: center; /* Center content horizontally */
+  }
+  
+  .form {
+    display: flex; /* Use flexbox for better layout control */
+    justify-content: center;
+    margin-top: 35px;
+  }
+
+.campo {
+    margin-right: 10px;
+    padding: 17px 35px;
+    outline: none;
+    color: #000000;
+    flex: 1; /* Ensure fields expand to fill available space */
+}
+
+.campo::placeholder {
+    color: #0f0000;
+}
+
+.footer-txt {
+    text-align: center;
+    margin-top: 20px; /* Adjust margin as needed */
+    border-top: 1px solid #0000007e;
+    padding: 20px 0;
+}
+
+.footer-txt p {
+    color: #18293A;
+    font-size: 16px;
+    text-align: center; /* Centra el texto horizontalmente */
+    margin: 0 auto;
+  }
+  
+  /* ... resto de tu CSS ... */
+  
+  /* Ejemplo para eliminar un borde (ajusta el selector según tu caso) */
+  .elemento-con-borde {
+    border: none;
+  }
+  
+  /* Ejemplo para eliminar un fondo de color (ajusta el selector según tu caso) */
+  .elemento-con-fondo {
+    background-color: transparent;
+  }
+
+  /* NUEVO */
+.contact-info {
+    margin-top: 60px; /* Espacio superior para separar del título del footer */
+    margin-bottom: 30px; /* Espacio inferior para separar del footer-txt */
+    display: flex;
+    flex-direction: column; /* Apila los elementos de contacto verticalmente */
+    align-items: center; /* Centra los elementos horizontalmente */
+    color: #333; /* Un color de texto general para la información de contacto */
+}
+
+/* NUEVO */
+.contact-info h3,
+.contact-info h4 {
+    margin-bottom: 10px;
+    color: #1a1a1a; /* Un color más oscuro para los encabezados de contacto */
+}
+
+/* NUEVO */
+.contact-info p {
+    margin-bottom: 8px; /* Espacio entre cada línea de información de contacto */
+    font-size: 1.1em; /* Ajusta el tamaño de fuente si es necesario */
+    line-height: 1.5; /* Espaciado entre líneas */
+}
+
+/* NUEVO */
+.contact-info p strong {
+    color: #000; /* Color más fuerte para los títulos como "WhatsApp" */
+}
+
+/* NUEVO */
+.contact-info a {
+    color: #007bff; /* Un color de enlace azul estándar */
+    text-decoration: none; /* Quita el subrayado por defecto */
+    transition: color 0.3s ease; /* Transición suave al pasar el ratón */
+}
+
+/* NUEVO */
+.contact-info a:hover {
+    color: #0056b3; /* Color de enlace al pasar el ratón */
+    text-decoration: underline; /* Subrayado al pasar el ratón */
+}
+
+/* NUEVO */
+.social-links {
+    margin-top: 20px; /* Espacio superior para separar de la información de contacto */
+    display: flex;
+    gap: 15px; /* Espacio entre los iconos de redes sociales */
+    align-items: center;
+    justify-content: center; /* Centra los iconos si no hay otros elementos */
+}
+
+/* NUEVO */
+.social-links img {
+    width: 40px; /* Tamaño de los iconos de redes sociales */
+    height: 40px;
+    border-radius: 50%; /* Si quieres que los iconos sean redondos */
+    transition: transform 0.3s ease; /* Efecto de zoom al pasar el ratón */
+}
+
+/* NUEVO */
+.social-links img:hover {
+    transform: scale(1.1); /* Ligeramente más grande al pasar el ratón */
+}
+
+/* NUEVO (si no lo tienes ya en tus botones generales) */
+.btn-btn {
+    /* Asegúrate de que estos estilos sean coherentes con tus otros botones */
+    display: inline-block; /* Permite aplicar padding y márgenes */
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    /* ... tus colores específicos ... */
+    background-color: rgb(255, 250, 250);
+    color: rgb(0, 0, 0);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-btn:hover {
+    background-color: rgb(200, 200, 200); /* Un color más oscuro al pasar el ratón */
+    color: rgb(50, 50, 50);
+}
+
+  @media (max-width: 991px) {
+    .footer {
+        padding: 0;
+        margin-top: -140px;
+    }
+
+    .form {
+        flex-direction: column;
+        align-items: center; /* Center fields vertically */
+    }
+
+    .campo {
+        margin: 0 0 10px 0;
+        width: 100%; /* Make fields full width on smaller screens */
+    }
+
+    .footer-txt {
+        margin-top: 30px;
+    }
+}
